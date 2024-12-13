@@ -34,8 +34,8 @@ const sketch = p => {
 		sinWaveColor = p.color('#03FF22');
 		knobPosX = 120;
 		knobPosY = 150;
-		kbias = new Knob(p, knobPosX, knobPosY, knobSizePx, knobValue, 300, 'Value');
-		kmod = new Knob(p, knobPosX, knobPosY + knobSizePx+150, knobSizePx, knobValue, 300, 'Mod');
+		kbias = new Knob(p, knobPosX, knobPosY, knobSizePx, knobValue, 0.0, 1.0, 300,'Value');
+		kmod = new Knob(p, knobPosX, knobPosY + knobSizePx+150, knobSizePx, knobValue, -1.0, 1.0, 300, 'Mod');
 		dg = new Diagram(
 			p,
 			diagramPosX,
@@ -70,22 +70,23 @@ const sketch = p => {
 		p.text('(c)2024 www.hexefx.com',  diagramPosX + diagramSizeX/2, canvas_h - 20);
 	}
 
-	p.mousePressed = () => {
-		if (kb.mousePressed() == true) dir = 0;
+	// p.mousePressed = () => {
+	// 	if (kb.mousePressed() == true) dir = 0;
 
-	}
+	// }
 
 	p.calcWave = (knobBiasPos, knobModPos) => {
 		theta += 0.02;
-
+		let sign = 1;
+		if (knobModPos < 0) sign = -1.0;
 		if (knobBiasPos > 0.5) {
-			if (knobBiasPos+knobModPos/2 > 1.0) {
-				knobBiasPos = 1.0 - knobModPos/2;
+			if (knobBiasPos + p.abs(knobModPos)/2 > 1.0) {
+				knobBiasPos = 1.0 - p.abs(knobModPos)/2;
 			}
 		}
 		else {
-			if (knobBiasPos-knobModPos/2< 0.0) {
-				knobModPos = knobBiasPos*2;
+			if (knobBiasPos - p.abs(knobModPos)/2< 0.0) {
+				knobModPos = knobBiasPos*2*sign;
 			}			
 		}
 		wave_ampl = knobModPos * 0.5;
