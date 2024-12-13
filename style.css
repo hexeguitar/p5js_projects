@@ -1,0 +1,26 @@
+:root {
+	/* these variables are used everywhere */
+	--bg: #2F2626;
+	/* background colour */
+	--b-radius: min(1.9vmin, 15px);
+	/* border radius */
+	--b-width: 0.3rem;
+	/* border thickness */
+	--spacing: 0.3rem;
+	/* widget spacing */
+	--font: 'Rubik', sans-serif !important;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg);
+  color: #CCC;
+  font-family: var(--font);
+
+}
+
+canvas {
+  display: block;
+  margin: auto;
+}
