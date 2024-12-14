@@ -1,5 +1,5 @@
 class Knob {
-	constructor(p, px, py, sizePx, val, valMin, valMax, rangeDg, name) {
+	constructor(p, px, py, sizePx, val, valMin, valMax, rangeDg, name, color) {
 		this.p = p;
 		this.posX = px;
 		this.posY = py;
@@ -17,6 +17,7 @@ class Knob {
 		this.c_stroke = 255;
 		this.size = sizePx;
 		this.ctrl_sf_ratio = 1.8;
+		this.color = color;
 	}
 	update() {
 		if (this.p.mouseIsPressed) this.mousePressed();
@@ -63,7 +64,7 @@ class Knob {
 		this.p.translate(this.posX, this.posY);
 		// draw a scale
 		this.p.noStroke();
-		this.p.fill(56, 46, 46);
+		this.p.fill(this.color);
 		this.p.ellipse(
 			0,
 			0,
@@ -171,7 +172,7 @@ class Diagram {
 		// y values
 		this.p.fill(204);
 		this.p.textAlign(this.p.RIGHT, this.p.CENTER);
-		this.p.textSize(12);
+		this.p.textSize(14);
 		this.p.strokeWeight(0);
 		this.p.text('0%', this.xpos - 5, this.ypos + this.dheight);
 		this.p.text('50%', this.xpos - 5, this.ypos + this.dheight / 2);
